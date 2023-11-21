@@ -1,26 +1,56 @@
 import java.lang.NumberFormatException
 
 fun main() {
-    println(" please enter any digits maximum 6 digits :")
-    val num = readLine()
-    try{
-        val num = num?.toInt()
-        if (num!=null){
-            if (num in 0..999999) {
-                val output = DigitComverter(num)
-                println("The corresponding words for $num is : $output")
-            }
-                else {
-                println("Please enter the valid number correspond to the given max Length")
-            }}
-            else
-            println("invalid input .please provide correct digit form")
-    }
-    catch (e: NumberFormatException){
-        println("invalid input. Please enter valid integer")
-    }
 
+//    print(" please enter any digits maximum 6 digits :")
+//    val num = readLine()
+//    try{
+//        val num = num?.toInt()
+//        if (num!=null){
+//            if (num in 0..999999) {
+//                val output = DigitComverter(num)
+//                println("The corresponding words for $num is : $output")
+//            }
+//                else {
+//                println("Please enter the valid number correspond to the given max Length")
+//            }}
+//            else
+//            println("invalid input .please provide correct digit form")
+//    }
+//    catch (e: NumberFormatException){
+//        println("invalid input. Please enter valid integer")
+//    }
+
+
+
+    var userInput: String?
+    var num: Int?
+
+    do {
+        print("Please enter any digits, up to 6 digits: ")
+        userInput = readLine()
+
+        num = try {
+            userInput?.toInt()
+        } catch (e: NumberFormatException) {
+            null
+        }
+
+        if (num == null || userInput?.all { it.isDigit() } != true || userInput.length > 6) {
+            println("Invalid input. Please enter a valid number.")
+        }
+
+    } while (num == null || userInput?.all { it.isDigit() } != true || userInput.length > 6)
+
+    val output = DigitComverter(num)
+    println("The corresponding words for $num is: $output")
 }
+
+
+
+
+
+
 
 fun DigitComverter(number: Int): String {
     val units = arrayOf("", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
